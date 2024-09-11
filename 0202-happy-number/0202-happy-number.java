@@ -3,17 +3,17 @@ class Solution {
         if(n<=0)
             return false;
         
-       HashSet<Integer>hs=new HashSet<>();
-       while(n!=1)
-       {
-           if(hs.contains(n))
-           {
-               return false;
-           }
-           hs.add(n);
-           n=helper(n);
-       }
-       return true;
+      Set<Integer> seen = new HashSet<>();
+        
+        while (n != 1) {
+            if (seen.contains(n)) {
+                return false;  // A cycle detected, not a happy number
+            }
+            seen.add(n);
+            n = helper(n);  // Calculate the sum of squares of the digits
+        }
+        
+        return true;  // Reached 1, so it's a happy number
     }
     public static int helper(int n)
     {
