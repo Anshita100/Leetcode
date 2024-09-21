@@ -13,7 +13,7 @@ class Solution {
         }
         return -1;
     }*/
-    public int majorityElement(int[] num) {
+   /* public int majorityElement(int[] num) {
 
         int major=num[0], count = 1;
         for(int i=1; i<num.length;i++){
@@ -26,5 +26,23 @@ class Solution {
             
         }
         return major;
+    }*/
+    public int majorityElement(int[] nums) {
+     int count = 0;
+        int candidate = 0;
+        
+        for (int num : nums) {
+            if (count == 0) {
+                candidate = num;
+            }
+            
+            if (num == candidate) {
+                count++;
+            } else {
+                count--;
+            }
+        }
+        
+        return candidate;
     }
 }
