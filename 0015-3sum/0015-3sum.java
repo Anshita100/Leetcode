@@ -1,5 +1,34 @@
 class Solution {
+ /*Brute-Force Solution:
+ for i = 0 to n-3:
+    for j = i+1 to n-2:
+        for k = j+1 to n-1:
+            if nums[i] + nums[j] + nums[k] == 0:
+                add the triplet (nums[i], nums[j], nums[k]) to the result
+
+    */
+    
     public List<List<Integer>> threeSum(int[] nums) {
+        Set<List<Integer>> result = new HashSet<>();
+        
+        for (int i = 0; i < nums.length; i++) {
+            Set<Integer> seen = new HashSet<>();
+            for (int j = i + 1; j < nums.length; j++) {  // Ensure j starts after i
+                int complement = - (nums[i] + nums[j]);
+                
+                // Ensure nums[j] != complement, and we avoid adding nums[i] == nums[j]
+                if (seen.contains(complement)) {
+                    List<Integer> triplet = Arrays.asList(nums[i], nums[j], complement);
+                    Collections.sort(triplet);  // Sort triplet to avoid duplicates
+                    result.add(triplet);  // Add the triplet to result set
+                }
+                
+                seen.add(nums[j]);  // Add current number to HashSet
+            }
+        }
+        return new ArrayList<>(result);
+    } 
+   /* public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
         Arrays.sort(nums);  // Sort the array
         
@@ -36,5 +65,5 @@ class Solution {
             }
         }
         return result;
-    }
+    }*/
 }
