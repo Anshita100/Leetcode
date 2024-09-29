@@ -8,31 +8,12 @@ class Solution {
 
     */
     
+  //  O(n²): Sorting takes O(n log n), and the two-pointer technique runs in O(n) for each element, so the total time complexity is O(n²).
     public List<List<Integer>> threeSum(int[] nums) {
-        Set<List<Integer>> result = new HashSet<>();
-        
-        for (int i = 0; i < nums.length; i++) {
-            Set<Integer> seen = new HashSet<>();
-            for (int j = i + 1; j < nums.length; j++) {  // Ensure j starts after i
-                int complement = - (nums[i] + nums[j]);
-                
-                // Ensure nums[j] != complement, and we avoid adding nums[i] == nums[j]
-                if (seen.contains(complement)) {
-                    List<Integer> triplet = Arrays.asList(nums[i], nums[j], complement);
-                    Collections.sort(triplet);  // Sort triplet to avoid duplicates
-                    result.add(triplet);  // Add the triplet to result set
-                }
-                
-                seen.add(nums[j]);  // Add current number to HashSet
-            }
-        }
-        return new ArrayList<>(result);
-    } 
-   /* public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
         Arrays.sort(nums);  // Sort the array
         
-        for (int i = 0; i < nums.length - 2; i++) {
+        for (int i = 0; i <=nums.length - 3; i++) {
             // Skip duplicates for the first element
             if (i > 0 && nums[i] == nums[i - 1]) continue;
 
@@ -65,5 +46,5 @@ class Solution {
             }
         }
         return result;
-    }*/
+    }
 }
