@@ -1,44 +1,54 @@
 class Solution {
     public int sumSubarrayMins(int[] arr) {
-        int length = arr.length;
-        int[] left = new int[length];
-        int[] right = new int[length];
-      
-        Arrays.fill(left, -1);
-        Arrays.fill(right, length);
-      
-        Deque<Integer> stack = new ArrayDeque<>();
-      
-        for (int i = 0; i < length; ++i) {
-            while (!stack.isEmpty() && arr[stack.peek()] >= arr[i]) {
-                stack.pop();
-            }
-            if (!stack.isEmpty()) {
-                left[i] = stack.peek();
-            }
-            stack.push(i);
-        }
-      
-        stack.clear();
-      
-        for (int i = length - 1; i >= 0; --i) {
+        int n = arr.length;
+        long sum = 0;
+        int mod = 1_000_000_007;
+        
+        // Arrays to store the next smaller and previous smaller indices
+        int[] nextSmaller = new int[n];
+        int[] prevSmaller = new int[n];
+        
+        // Stack for finding the next smaller element
+        Stack<Integer> stack = new Stack<>();
+        
+        // Find the next smaller element for each element
+        for (int i = 0; i < n; i++) {
             while (!stack.isEmpty() && arr[stack.peek()] > arr[i]) {
-                stack.pop();
-            }
-            if (!stack.isEmpty()) {
-                right[i] = stack.peek();
+                nextSmaller[stack.pop()] = i;
             }
             stack.push(i);
         }
-      
-        int mod = (int) 1e9 + 7;
-        long answer = 0;
-      
-        for (int i = 0; i < length; ++i) {
-            answer += (long) (i - left[i]) * (right[i] - i) % mod * arr[i] % mod;
-            answer %= mod;
+        
+        // All remaining elements in the stack have no smaller element to their right
+        while (!stack.isEmpty()) {
+            nextSmaller[stack.pop()] = n; // Using n as a boundary
         }
-      
-        return (int) answer;
+        
+        // Reset stack for finding the previous smaller element
+        for (int i = 0; i < n; i++) {
+            stack.push(i);
+        }
+        
+        // Find the previous smaller element for each element
+        for (int i = n - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && arr[stack.peek()] >= arr[i]) {
+                prevSmaller[stack.pop()] = i;
+            }
+            stack.push(i);
+        }
+        
+        // All remaining elements in the stack have no smaller element to their left
+        while (!stack.isEmpty()) {
+            prevSmaller[stack.pop()] = -1; // Using -1 as a boundary
+        }
+        
+        // Calculate the sum of subarray minimums
+        for (int i = 0; i < n; i++) {
+            long leftCount = i - prevSmaller[i];
+            long rightCount = nextSmaller[i] - i;
+            sum = (sum + (leftCount * rightCount % mod) * arr[i] % mod) % mod;
+        }
+        
+        return (int) sum;
     }
 }
