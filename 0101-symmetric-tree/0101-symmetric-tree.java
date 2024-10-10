@@ -1,16 +1,17 @@
 class Solution {
     public boolean isSymmetric(TreeNode root) {
-        if (root == null) return true;
+        // Call the isInvert method directly
         return isInvert(root.left, root.right);
     }
 
     public boolean isInvert(TreeNode left, TreeNode right) {
-        if (left == null && right == null) {
+        // If both nodes are null, they are mirrors
+        if (left == null && right == null)
             return true;
-        }
-        if (left == null || right == null || left.val != right.val) {
+        // If one of them is null, they are not mirrors
+        if (left == null || right == null)
             return false;
-        }
-        return isInvert(left.left, right.right) && isInvert(left.right, right.left);
+        // Check if values are the same and subtrees are mirrors
+        return (left.val == right.val) && isInvert(left.left, right.right) && isInvert(left.right, right.left);
     }
 }
