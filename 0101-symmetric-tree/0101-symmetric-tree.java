@@ -12,12 +12,15 @@ class Solution {
     }
 
     public boolean isSame(TreeNode root) {
-        if (root == null)
-            return true;
-        if ((root.left == null && root.right != null) || (root.left != null && root.right == null))
-            return false;
-        if (root.right != null && root.left != null && root.left.val != root.right.val)
-            return false;
-        return isSame(root.left) && isSame(root.right);
-    }
+    if (root == null) return true;
+    // If either left or right is null and the other isn't, return false
+    if (root.left == null && root.right != null || root.left != null && root.right == null)
+        return false;
+    // If both left and right are not null, check their values
+    if (root.left != null && root.right != null && root.left.val != root.right.val)
+        return false;
+    // Recursively check the left and right subtrees
+    return isSame(root.left) && isSame(root.right);
+}
+
 }
