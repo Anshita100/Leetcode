@@ -15,39 +15,33 @@
  */
 class Solution {
     public TreeNode deleteNode(TreeNode root, int key) {
-        if (root == null) {
-            return null;  // Base case: empty tree or key not found
-        }
+        if (root == null) return null;
         
-        // Search for the node to delete
-        if (key < root.val) {
-            root.left = deleteNode(root.left, key);  // Go left
-        } else if (key > root.val) {
-            root.right = deleteNode(root.right, key);  // Go right
-        } else {
-            // Node to be deleted is found
-            if (root.left == null && root.right == null) {
-                // Case 1: Node is a leaf, just delete it
-                return null;
-            } else if (root.left == null) {
-                // Case 2: Node has only right child
-                return root.right;
-            } else if (root.right == null) {
-                // Case 2: Node has only left child
-                return root.left;
-            } else {
-                // Case 3: Node has two children
-                TreeNode minNode = findMin(root.right);  // Find inorder successor
-                root.val = minNode.val;  // Replace the value of the node with successor's value
-                root.right = deleteNode(root.right, minNode.val);  // Delete the inorder successor
+        if (root.val == key) {
+            // Case 1: Node is a leaf (no children)
+            if (root.left == null && root.right == null) return null;
+            
+            // Case 2: Node has only one child
+            if (root.left == null || root.right == null) {
+                return (root.left != null) ? root.left : root.right;
             }
+            
+            // Case 3: Node has two children
+            TreeNode minInRight = findMin(root.right);  // Find inorder successor
+            root.val = minInRight.val;  // Replace node value with successor's value
+            root.right = deleteNode(root.right, minInRight.val);  // Delete inorder successor
+        } 
+        else if (root.val > key) {
+            root.left = deleteNode(root.left, key);  // Recur in the left subtree
+        } else {
+            root.right = deleteNode(root.right, key);  // Recur in the right subtree
         }
         
-        return root;  // Return the modified root of the tree
+        return root;
     }
     
-    // Helper function to find the minimum value in a subtree (leftmost node)
-    private TreeNode findMin(TreeNode node) {
+    // Helper function to find the leftmost (minimum) node in a subtree
+    public TreeNode findMin(TreeNode node) {
         while (node.left != null) {
             node = node.left;
         }
