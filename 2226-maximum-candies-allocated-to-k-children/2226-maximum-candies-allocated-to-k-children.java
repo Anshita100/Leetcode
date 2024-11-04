@@ -31,9 +31,7 @@ class Solution {
                 return true;
             }
         }
-        if(currentChild >= child)
-            return true;
-        else 
-            return false;
+         
+       return false;
     }
 }
