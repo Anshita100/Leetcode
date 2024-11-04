@@ -31,6 +31,9 @@ class Solution {
                 return true;
             }
         }
-        return currentChild >= child;
+        if(currentChild >= child)
+            return true;
+        else 
+            return false;
     }
 }
