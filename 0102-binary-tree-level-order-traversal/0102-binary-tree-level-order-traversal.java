@@ -13,7 +13,8 @@
  *     }
  * }
  */
-/*class Solution {
+/*   2ms
+class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> ans = new ArrayList<>();
         if (root == null) return ans;
@@ -52,7 +53,37 @@
         return ans;
     }
 }*/
+
 class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> ans = new ArrayList<>();
+        if (root == null) return ans; // Early exit for empty tree
+        
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root); // Use offer() for better performance
+        
+        while (!q.isEmpty()) {
+            int levelSize = q.size(); // Get the number of nodes at the current level
+            List<Integer> currentLevel = new ArrayList<>();
+            
+            for (int i = 0; i < levelSize; i++) {
+                TreeNode curr = q.poll(); // Dequeue node
+                currentLevel.add(curr.val); // Add the node's value
+                
+                // Enqueue left and right children if they exist
+                if (curr.left != null) q.offer(curr.left);
+                if (curr.right != null) q.offer(curr.right);
+            }
+            
+            ans.add(currentLevel); // Add the current level's result to the final answer
+        }
+        
+        return ans;
+    }
+}
+
+//1ms
+/*class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
          List<List<Integer>> result=new ArrayList<>();
        
@@ -76,4 +107,4 @@ class Solution {
         }
         return result;
     }
-}
+}*/
