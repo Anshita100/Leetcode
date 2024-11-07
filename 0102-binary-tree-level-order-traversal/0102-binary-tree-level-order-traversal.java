@@ -13,7 +13,7 @@
  *     }
  * }
  */
-class Solution {
+/*class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> ans = new ArrayList<>();
         if (root == null) return ans;
@@ -50,5 +50,30 @@ class Solution {
         }
         
         return ans;
+    }
+}*/
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+         List<List<Integer>> result=new ArrayList<>();
+       
+        if(root==null) return result;
+        Queue<TreeNode> q=new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty())
+        {
+            int size=q.size();
+            
+            List<Integer> currlevellist=new ArrayList<>();
+            for(int i=size;i>0;i--)
+            {
+                TreeNode curr=q.remove();
+                currlevellist.add(curr.val);
+                if(curr.left!=null) q.add(curr.left);
+                if(curr.right!=null) q.add(curr.right);
+                
+            }
+            result.add(currlevellist);
+        }
+        return result;
     }
 }
