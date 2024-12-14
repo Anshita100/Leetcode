@@ -1,4 +1,23 @@
 class Solution {
+    //brute approach O(n2)
+ /*   public int majorityElement(int[] nums) {
+        
+        for(int i=0;i<nums.length;i++)
+        {
+            int count=0;
+            for(int j=0;j<nums.length;j++)
+            {
+                if(nums[i]==nums[j])
+                {
+                    count++;
+                }
+            }
+            if(count>=((nums.length/2)+1))
+              return nums[i];  
+        }
+        return -1;
+    }*/    
+    //better approach
   /*  public int majorityElement(int[] nums) {
         int n=nums.length;
         int a=(n/2)+1;
@@ -13,21 +32,24 @@ class Solution {
         }
         return -1;
     }*/
-   /* public int majorityElement(int[] num) {
+    public int majorityElement(int[] num) {
 
         int major=num[0], count = 1;
         for(int i=1; i<num.length;i++){
-            if(count==0){
+            if(count==0)
+            {
+               count++;
+               major=num[i]; 
+            } 
+            else if(major==num[i])
                 count++;
-                major=num[i];
-            }else if(major==num[i]){
-                count++;
-            }else count--;
-            
+            else 
+                count--;    
         }
         return major;
-    }*/
-    public int majorityElement(int[] nums) {
+    }
+    //Moore Voting Algorithm
+  /*  public int majorityElement(int[] nums) {
      int count = 0;
         int candidate = 0;
         
@@ -45,5 +67,5 @@ class Solution {
         }
         
         return candidate;
-    }
+    }*/
 }
