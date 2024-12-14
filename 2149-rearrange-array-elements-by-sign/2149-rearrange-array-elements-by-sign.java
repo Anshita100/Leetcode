@@ -15,10 +15,6 @@ class Solution {
                 k=k+2;
             }
         }
-        for(int i=0;i<n;i++)
-        {
-            nums[i]=temp[i];
-        }
-        return nums;
+        return temp;
     }
 }
