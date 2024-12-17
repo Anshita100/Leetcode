@@ -19,10 +19,7 @@ class Solution {
         for(j=(a+b);j<(a+b+c);j++) nums[j]=2;
       */  
         //optimal solution
-        int r=0,w=0,b=nums.length-1;
-        
-        for(int i=0;i<nums.length;i++)
-        {
+           int r=0,w=0,b=nums.length-1;
             while(w<=b)
             {
                 if(nums[w]==0)
@@ -43,7 +40,6 @@ class Solution {
                     b--;
                 }    
             }
-        }
         
     }
 }
