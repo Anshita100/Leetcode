@@ -17,7 +17,7 @@ class Solution {
         }
         return maxlen;*/
         
-   //   public int characterReplacement(String s, int k) {
+ /*  //   public int characterReplacement(String s, int k) {
     int l = 0, r = 0;
     HashMap<Character, Integer> hm = new HashMap<>();
     int maxfreq = 0, maxlen = 0;
@@ -52,6 +52,33 @@ class Solution {
 
         // Expand the window
         r++;
+    }
+
+    return maxlen;
+}*/
+//public int characterReplacement(String s, int k) {
+    int[] freq = new int[26]; // Array to store frequencies of characters
+    int l = 0, maxfreq = 0, maxlen = 0;
+
+    for (int r = 0; r < s.length(); r++) {
+        // Update frequency of the current character
+        char currChar = s.charAt(r);
+        freq[currChar - 'A']++;
+
+        // Update max frequency in the current window
+        maxfreq = Math.max(maxfreq, freq[currChar - 'A']);
+
+        // Check if the number of changes needed exceeds k
+        int changes = (r - l + 1) - maxfreq;
+        if (changes > k) {
+            // Shrink the window from the left
+            char leftChar = s.charAt(l);
+            freq[leftChar - 'A']--;
+            l++;
+        }
+
+        // Update the maximum length of the valid window
+        maxlen = Math.max(maxlen, r - l + 1);
     }
 
     return maxlen;
