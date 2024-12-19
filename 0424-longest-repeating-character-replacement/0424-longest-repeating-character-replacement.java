@@ -35,10 +35,17 @@ class Solution {
 
         // If changes exceed k, shrink the window from the left
         if (changes > k) {
-            char leftChar = s.charAt(l);
-            hm.put(leftChar, hm.get(leftChar) - 1);
-            l++;
-        }
+    char leftChar = s.charAt(l);
+    hm.put(leftChar, hm.get(leftChar) - 1);
+    l++;
+
+    // Recalculate maxfreq (Optional, only for theoretical correctness)
+    maxfreq = 0;
+    for (int freq : hm.values()) {
+        maxfreq = Math.max(maxfreq, freq);
+    }
+}
+
 
         // Update the maximum length of the valid window
         maxlen = Math.max(maxlen, r - l + 1);
