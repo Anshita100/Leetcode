@@ -23,8 +23,8 @@ Space Complexity: O(N) where N is the size of HashSet taken for storing the elem
         return ans;
     }*/
     
-    //optimised approach
-    public int lengthOfLongestSubstring(String s) {
+    //optimised approach 6ms
+  /*  public int lengthOfLongestSubstring(String s) {
         int l=0;int ans=0;
         Set<Character>hs=new HashSet<>();
         for(int r=0;r<s.length();r++)
@@ -38,9 +38,9 @@ Space Complexity: O(N) where N is the size of HashSet taken for storing the elem
                 ans=Math.max(ans,r-l+1);
         }
         return ans;     
-    }
+    }*/
     
-/*     public int lengthOfLongestSubstring(String s) {
+     public int lengthOfLongestSubstring(String s) {
         int n = s.length();
         int l = 0, r = 0;
         int maxlen = 0;
@@ -48,7 +48,9 @@ Space Complexity: O(N) where N is the size of HashSet taken for storing the elem
 
         while (r < n) {
             char currentChar = s.charAt(r);
-            if (hm.containsKey(currentChar)) {
+            if (hm.containsKey(currentChar))
+       //agr woh char present hai toh l ko uske aage wale index pr set karo         
+            {
                 l = Math.max(hm.get(currentChar) + 1, l);  // Ensure 'l' only moves forward
             }
             hm.put(currentChar, r);
@@ -57,5 +59,5 @@ Space Complexity: O(N) where N is the size of HashSet taken for storing the elem
         }
 
         return maxlen;
-    }*/
+    }
 }
