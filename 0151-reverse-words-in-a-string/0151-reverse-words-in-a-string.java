@@ -1,6 +1,6 @@
 class Solution {
     public String reverseWords(String s) {
-        //brute TC-O(n)
+        //brute TC-O(n) 7ms space-O(n)
       /*  Stack<String> st = new Stack<>();
         StringBuilder sb = new StringBuilder();
         int i = 0;
@@ -34,8 +34,9 @@ class Solution {
 
         return result.toString();*/
         
+        //better 6ms time-O(n),space-O(n)
         // Split the string by spaces and remove extra spaces
-        String[] words = s.trim().split("\\s+");
+       /* String[] words = s.trim().split("\\s+");
         StringBuilder result = new StringBuilder();
 
         // Iterate over words in reverse order
@@ -46,7 +47,28 @@ class Solution {
             }
         }
 
-        return result.toString();
+        return result.toString();*/
+        StringBuilder result = new StringBuilder();
+        int i = s.length() - 1;
+
+        while (i >= 0) {
+            // Skip trailing spaces
+            while (i >= 0 && s.charAt(i) == ' ') i--;
+
+            // Find the end of the word
+            int j = i;
+
+            // Find the start of the word
+            while (i >= 0 && s.charAt(i) != ' ') i--;
+
+            // Append the word to the result
+            if (j >= 0) {
+                result.append(s.substring(i + 1, j + 1));
+                if (i > 0) result.append(" ");
+            }
+        }
+
+        return result.toString().trim();
     
     }
 }
