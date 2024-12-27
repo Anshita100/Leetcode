@@ -1,6 +1,7 @@
 class Solution {
     public boolean isIsomorphic(String s, String t) {
-     /*   HashMap <Character,Character> map=new HashMap<>();
+     /*   //11ms
+     HashMap <Character,Character> map=new HashMap<>();
         
         int n=s.length();
         int m=t.length();
@@ -22,6 +23,8 @@ for (int i = 0; i < s.length(); i++) {
             }
         }
         return true;*/
+        
+   /*     //17ms TC-O(N),SC-O(N)
         if (s.length() != t.length()) return false;
         
         HashMap<Character, Character> mapS = new HashMap<>();
@@ -44,6 +47,24 @@ for (int i = 0; i < s.length(); i++) {
             }
         }
         
+        return true;*/
+        
+          if (s.length() != t.length()) return false;
+        
+        int[] mapS = new int[256];
+        int[] mapT = new int[256];
+        
+        for (int i = 0; i < s.length(); i++) {
+            char ch1 = s.charAt(i);
+            char ch2 = t.charAt(i);
+            
+            if (mapS[ch1] != mapT[ch2]) return false;
+            
+            mapS[ch1] = i + 1;
+            mapT[ch2] = i + 1;
+        }
+        
         return true;
+        
     }
 }
