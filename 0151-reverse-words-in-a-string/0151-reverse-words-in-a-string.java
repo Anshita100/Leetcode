@@ -1,6 +1,7 @@
 class Solution {
     public String reverseWords(String s) {
-        Stack<String> st = new Stack<>();
+        //brute TC-O(n)
+      /*  Stack<String> st = new Stack<>();
         StringBuilder sb = new StringBuilder();
         int i = 0;
         while (i < s.length()) {
@@ -31,6 +32,21 @@ class Solution {
             }
         }
 
+        return result.toString();*/
+        
+        // Split the string by spaces and remove extra spaces
+        String[] words = s.trim().split("\\s+");
+        StringBuilder result = new StringBuilder();
+
+        // Iterate over words in reverse order
+        for (int i = words.length - 1; i >= 0; i--) {
+            result.append(words[i]);
+            if (i != 0) {
+                result.append(" ");
+            }
+        }
+
         return result.toString();
+    
     }
 }
