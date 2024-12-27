@@ -24,9 +24,26 @@ class Solution {
         boolean result = Arrays.equals(sCharArray, tCharArray);
         return result;*/
         
-         if (s.length() != t.length()) return false;
+               
+        if (s.length() != t.length()) return false;
         
-        // Create a frequency array of size 26 (for lowercase English letters)
+        HashMap<Character, Integer> countMap = new HashMap<>();
+        
+        // Count frequency of characters in s
+        for (int i = 0; i < s.length(); i++) {
+            countMap.put(s.charAt(i), countMap.getOrDefault(s.charAt(i), 0) + 1);
+            countMap.put(t.charAt(i), countMap.getOrDefault(t.charAt(i), 0) - 1);
+        }
+        
+        // Check if all values in the map are zero
+        for (int count : countMap.values()) {
+            if (count != 0) return false;
+        }
+        
+        return true;
+    
+        //5ms-O(N),SC-O(1)
+     /*   if (s.length() != t.length()) return false;
         int[] charCount = new int[26];
         
         // Count characters for string s and t
@@ -39,8 +56,7 @@ class Solution {
         for (int count : charCount) {
             if (count != 0) return false;
         }
-        
-        return true;
+        return true;*/
     
     }
 }
