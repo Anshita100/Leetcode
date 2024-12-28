@@ -23,7 +23,7 @@ Space Complexity: O(N) where N is the size of HashSet taken for storing the elem
         return ans;
     }*/
     
-    //optimised approach 6ms
+    //optimised approach 6ms TC-O(2N)
   /*  public int lengthOfLongestSubstring(String s) {
         int l=0;int ans=0;
         Set<Character>hs=new HashSet<>();
@@ -40,22 +40,24 @@ Space Complexity: O(N) where N is the size of HashSet taken for storing the elem
         return ans;     
     }*/
     
+    //5ms TC-O(N)
      public int lengthOfLongestSubstring(String s) {
         int n = s.length();
         int l = 0, r = 0;
         int maxlen = 0;
         HashMap<Character, Integer> hm = new HashMap<>();
 
-        while (r < n) {
+         for(r=0;r<s.length();r++){
             char currentChar = s.charAt(r);
             if (hm.containsKey(currentChar))
        //agr woh char present hai toh l ko uske aage wale index pr set karo         
             {
                 l = Math.max(hm.get(currentChar) + 1, l);  // Ensure 'l' only moves forward
+                //We calculate the window size as r - l + 1, and the l pointer ensures that only characters in the current valid window are considered hashmap old values wont interfere
             }
             hm.put(currentChar, r);
             maxlen = Math.max(maxlen, r - l + 1);
-            r++;
+          
         }
 
         return maxlen;
