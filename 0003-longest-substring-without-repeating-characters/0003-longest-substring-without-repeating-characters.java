@@ -4,28 +4,28 @@ class Solution {
     Time Complexity: O( N2 )
 Space Complexity: O(N) where N is the size of HashSet taken for storing the elements
     */
- /*   public int lengthOfLongestSubstring(String s) {
+   public int lengthOfLongestSubstring(String s) {
         int n=s.length();
-        int ans=Integer.MIN_VALUE;
+        int maxlen=0;
         for(int i=0;i<n;i++)
         {
               Set<Character>hs=new HashSet<>();
               for(int j=i;j<n;j++)
               {
                   if(hs.contains(s.charAt(j)))
-                  {
-                      ans=Math.max(ans,(j-1)-i+1);
+                  {                      
                       break;
                   }
-                   hs.add(s.charAt(j));
+                  hs.add(s.charAt(j));
+                  maxlen=Math.max(maxlen,j-i+1);
               }
         }
-        return ans;
-    }*/
+        return maxlen;
+    
     
     //optimised approach 6ms TC-O(2N)
   /*  public int lengthOfLongestSubstring(String s) {
-        int l=0;int ans=0;
+        int l=0;int maxlen=0;
         Set<Character>hs=new HashSet<>();
         for(int r=0;r<s.length();r++)
         {
@@ -35,13 +35,13 @@ Space Complexity: O(N) where N is the size of HashSet taken for storing the elem
                     l++;
                 }
                 hs.add(s.charAt(r));
-                ans=Math.max(ans,r-l+1);
+                maxlen=Math.max(maxlen,r-l+1);
         }
-        return ans;     
+        return maxlen;     
     }*/
     
     //5ms TC-O(N)
-     public int lengthOfLongestSubstring(String s) {
+   /*  public int lengthOfLongestSubstring(String s) {
         int n = s.length();
         int l = 0, r = 0;
         int maxlen = 0;
@@ -60,6 +60,6 @@ Space Complexity: O(N) where N is the size of HashSet taken for storing the elem
           
         }
 
-        return maxlen;
+        return maxlen;*/
     }
 }
