@@ -12,6 +12,8 @@ class Solution {
         
         return false;*/
         
+        
+        //0ms TC-O(N).SC-O(N)
         if (A.length() != B.length()) return false;
         
         // Concatenate A with itself and check if B is a substring of A + A
